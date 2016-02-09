@@ -1,5 +1,5 @@
 {
-  "name": "react-range-slider",
+  "name": "@mmorrissey/react-range-slider",
   "version": "0.2.0",
   "description": "A flexible slider for reactjs.",
   "main": "index.js",
