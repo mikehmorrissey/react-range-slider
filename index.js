@@ -9,6 +9,13 @@ var PropTypes = React.PropTypes;
 var assign = require('object-assign');
 var event = require('./event');
 var Cursor = React.createFactory(require('./Cursor'));
+var labels = [
+  'Resolution Time',
+  'Job Resolved',
+  'Customer Satisfaction',
+  'Mentorship Hangout',
+  'Outages'
+]
 
 var noop = function () {}
 
@@ -447,6 +454,25 @@ var RangeSlider = React.createClass({
       position: 'absolute',
       backgroundColor: this.state.value.length > 0 ? this.state.value[i].color : null
     };
+
+    var prev = i < 1 ? 0 : this.state.value[i - 1].value
+    var value = this.state.value[i].value - prev
+    var formattedVal = value / 100 * 1000
+    var children = [
+      React.createElement('div', {
+        style: {color: 'white', fontSize: 14, padding: 10, fontWeight: 100},
+        children: [
+          React.createElement('div', {
+            children: formattedVal
+          }),
+
+          React.createElement('div', {
+            children: labels[i]
+          })
+        ]
+      })
+    ]
+
     style[this.state.minProp] = from;
     style[this.state.maxProp] = this.state.upperBound - to;
     return React.createElement('div', {
@@ -454,7 +480,8 @@ var RangeSlider = React.createClass({
       ref: 'bar' + i,
       className: 'bar bar-' + i + (this.state.clicked === i ? ' active' : ''),
       style: style,
-      onClick: this.handleBarClick.bind(this, i)
+      onClick: this.handleBarClick.bind(this, i),
+      children: children
     });
   },
 
