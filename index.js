@@ -308,7 +308,7 @@ var RangeSlider = React.createClass({
     if (this.props.disabled) return;
     // Make it possible to attach event handlers on top of this one
     this.props.onMouseDown(e);
-    e = this.isTouchDevice() && e.changedTouches ? e.changedTouches[e.changedTouches.length - 1] : e;
+    e = e.changedTouches ? e.changedTouches[e.changedTouches.length - 1] : e;
     var position = e['page' + this.state.axis];
     var value = this.state.min,
       l = this.state.value.length;
@@ -335,7 +335,7 @@ var RangeSlider = React.createClass({
   handleDrag: function (e) {
     if (this.props.disabled) return;
 
-    e = this.isTouchDevice() ? e.changedTouches[e.changedTouches.length - 1] : e;
+    e = e.changedTouches ? e.changedTouches[e.changedTouches.length - 1] : e;
     var position = e['page' + this.state.axis],
       diffPosition = position - this.state.startPosition,
       diffValue = (diffPosition / this.state.upperBound) * (this.props.max - this.props.min),

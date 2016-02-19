@@ -7,11 +7,10 @@ var event = {};
 event.isTouchDevice = function () {
   var isTouchDevice = false;
   // Check if is Browser
-  // Commenting this out so that chromebook can use mouse.  This breaks all touch screen functionality
-  // if (typeof window !== 'undefined') {
-  //   isTouchDevice = 'ontouchstart' in window // works on most browsers
-  //     || 'onmsgesturechange' in window; // works on ie10 on ms surface
-  // }
+  if (typeof window !== 'undefined') {
+    isTouchDevice = 'ontouchstart' in window // works on most browsers
+      || 'onmsgesturechange' in window; // works on ie10 on ms surface
+  }
   return isTouchDevice;
 }
 
